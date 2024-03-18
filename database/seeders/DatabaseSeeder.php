@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         \App\Models\Products::factory(10)->create();
+        $this->call(RoleSeeder::class);
     }
 }
