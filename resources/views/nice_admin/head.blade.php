@@ -25,6 +25,7 @@
   
     <!-- Template Main CSS File -->
     <link href="{{ asset('nice_admin/') }}/assets/css/style.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
     <!-- =======================================================
     * Template Name: NiceAdmin - v2.5.0

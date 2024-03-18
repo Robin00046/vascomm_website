@@ -13,8 +13,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
-        
+        // get produts take 10 from last created
+        $products = Products::latest()->take(15)->get();
+
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -30,7 +32,18 @@ class ProductsController extends Controller
      */
     public function store(StoreProductsRequest $request)
     {
-        //
+        // create new product
+        $imagename = time() . '.' . $request->gambar->extension();
+        $request->gambar->move(public_path('images'), $imagename);
+
+        // dd($request->all());
+        Products::create([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'gambar' => $imagename,
+            'status' => $request->status,
+        ]);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -46,7 +59,8 @@ class ProductsController extends Controller
      */
     public function edit(Products $products)
     {
-        //
+        // get product by id
+
     }
 
     /**
@@ -54,7 +68,16 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductsRequest $request, Products $products)
     {
-        //
+        // update product by id and image 
+        $imagename = time() . '.' . $request->gambar->extension();
+        $request->gambar->move(public_path('images'), $imagename);
+        $products->update([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'gambar' => $imagename,
+            'status' => $request->status,
+        ]);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -62,6 +85,9 @@ class ProductsController extends Controller
      */
     public function destroy(Products $products)
     {
-        //
+        // delete product by id and image
+        $products->delete();
+        $products->gambar->delete();
+        return redirect()->route('products.index');
     }
 }
