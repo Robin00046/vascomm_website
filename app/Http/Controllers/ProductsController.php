@@ -42,8 +42,9 @@ class ProductsController extends Controller
             'harga' => $request->harga,
             'gambar' => $imagename,
             'status' => $request->status,
+            'stok' => $request->stok,
         ]);
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('success', 'Product created successfully');
     }
 
     /**
@@ -66,28 +67,42 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductsRequest $request, Products $products)
+    public function update(UpdateProductsRequest $request, $id)
     {
+        $products = Products::find($id);
+        // dd($request->all());
         // update product by id and image 
-        $imagename = time() . '.' . $request->gambar->extension();
-        $request->gambar->move(public_path('images'), $imagename);
-        $products->update([
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'gambar' => $imagename,
-            'status' => $request->status,
-        ]);
-        return redirect()->route('products.index');
+        if ($request->gambar) {
+            $imagename = time() . '.' . $request->gambar->extension();
+            $request->gambar->move(public_path('images'), $imagename);
+            $products->update([
+                'nama' => $request->nama,
+                'harga' => $request->harga,
+                'gambar' => $imagename,
+                'status' => $request->status,
+                'stok' => $request->stok,
+            ]);
+        } else {
+            $products->update([
+                'nama' => $request->nama,
+                'harga' => $request->harga,
+                'status' => $request->status,
+            ]);
+        }
+
+        return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Products $products)
+    public function destroy($id)
     {
         // delete product by id and image
+        // dd($id);
+        $products = Products::find($id);
         $products->delete();
-        $products->gambar->delete();
-        return redirect()->route('products.index');
+        // $products->gambar->delete();
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }
 }

@@ -31,7 +31,7 @@ class AuthController extends Controller
         $user->assignRole('customer');
         $data = ['password' => $password];
         Mail::to($request->email)->send(new CustomerPasswordMail($data)); // assuming you have created a Mailable
-        redirect()->route('login')->with('success', 'User created successfully. Password sent to user email');
+        return redirect()->route('login')->with('success', 'Registrasi berhasil, silahkan login dengan password yang dikirim ke email anda');
     }
 
     // login user
@@ -56,7 +56,11 @@ class AuthController extends Controller
             return back()->with('error', 'Invalid password');
         }
 
-        return redirect()->route('dashboard')->with('success', 'Login successful');
+        if ($user->hasRole('admin')) {
+            return redirect()->route('dashboard')->with('success', 'Login successful');
+        } else if ($user->hasRole('customer')) {
+            return redirect()->route('home')->with('success', 'Login successful');
+        }
     }
 
     // logout user

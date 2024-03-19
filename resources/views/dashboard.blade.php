@@ -1,56 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-        .login-container {
-            width: 300px;
-            margin: 0 auto;
-            margin-top: 100px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-        }
-        .login-container h2 {
-            text-align: center;
-        }
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        .login-container button {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 0;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        .login-container button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <h2>Dashboard</h2>
-            <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
-        <i class="bi bi-box-arrow-right"></i>
-        <span>Sign Out</span>
-    </a>
-    </div>
-</body>
-</html>
+@extends('nice_admin.main')
+
+@section('content')
+<div class="container-fluid">
+    <main id="main" class="main">
+        <div class="col-lg-12">
+            <div class="row">
+  
+              <!-- user Card -->
+              <div class="col-xxl-4 col-md-3">
+                <div class="card info-card user-card">  
+                  <div class="card-body">
+                    <h5 class="card-title">Customer Active</h5>
+  
+                    <div class="d-flex align-items-center">
+                      <div class="ps-3">
+                        <h5>{{ $customer_active }}</h5>
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-xxl-4 col-md-3">
+                <div class="card info-card user-card">  
+                  <div class="card-body">
+                    <h5 class="card-title">Customer Inactive</h5>
+  
+                    <div class="d-flex align-items-center">
+                      <div class="ps-3">
+                        <h5>{{ $customer_inactive }}</h5>
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-xxl-4 col-md-3">
+                <div class="card info-card user-card">  
+                  <div class="card-body">
+                    <h5 class="card-title">Product Active</h5>
+  
+                    <div class="d-flex align-items-center">
+                      <div class="ps-3">
+                        <h5>{{ $product_active }}</h5>
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-xxl-4 col-md-3">
+                <div class="card info-card user-card">  
+                  <div class="card-body">
+                    <h5 class="card-title">Product Inactive</h5>
+  
+                    <div class="d-flex align-items-center">
+                      <div class="ps-3">
+                        <h5>{{ $product_inactive }}
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+              <!-- End user Card -->
+  
+  
+              <!-- Top Create -->
+              <div class="col-8">
+                <div class="card top-Create overflow-auto">
+  
+                  <div class="card-body pb-0">
+                    <h5 class="card-title">Top Create</h5>
+  
+                    <table class="table table-borderless">
+                      <thead>
+                        <tr>
+                          <th scope="col">Preview</th>
+                          <th scope="col">Product</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Stock</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($products as $product)
+                        <tr>
+                          <td>
+                            <img src="{{ $product->gambar }}" alt="" style="width: 100px; height: 100px;" class="img-fluid">
+                          </td>
+                          <td>
+                            <h6>{{ $product->nama }}</h6>
+                          </td>
+                          <td>
+                            <h6>Rp. {{ number_format($product->harga) }}</h6>
+                          </td>
+                          <td>
+                            <h6>{{ $product->stok }}</h6>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+  
+                  </div>
+  
+                </div>
+              </div><!-- End Top Selling -->
+  
+            </div>
+          </div>
+    </main>
+    
+</div>
+
+@endsection

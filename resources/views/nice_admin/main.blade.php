@@ -5,10 +5,10 @@
 
 <body>
     @include('nice_admin.header')
-    @role('Admin')
+    {{-- @role('Admin') --}}
 
     @include('nice_admin.sidebar.sidebar_admin')
-    @endrole
+    {{-- @endrole --}}
     {{-- @role('Ketua Gapoktan')
 
     @include('nice_admin.sidebar.sidebar_gapoktan')

@@ -25,8 +25,9 @@ class UpdateProductsRequest extends FormRequest
             //
             'nama' => 'required',
             'harga' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1000',
             'status' => 'required',
+            'stok' => 'required',
         ];
     }
 }

@@ -21,7 +21,8 @@ class ProductsFactory extends Factory
             'nama' => $this->faker->name,
             'harga' => $this->faker->randomNumber(5),
             'gambar' => $this->faker->image(public_path('images'), 640, 480, null, false),
-            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'status' => $this->faker->randomElement(['1', '0']),
+            'stok' => $this->faker->randomNumber(2),
         ];
     }
 }

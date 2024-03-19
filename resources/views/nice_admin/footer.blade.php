@@ -1,6 +1,6 @@
  <!-- ======= Footer ======= -->
  <footer id="footer" class="footer">
     <div class="copyright">
-      <strong><span>Benny Bora Eka Fravasta /</span></strong> 17.0504.0118
+      <strong><span>Vasscomm</span></strong> &copy; 2022
     </div>
   </footer><!-- End Footer -->

@@ -14,6 +14,7 @@ class Products extends Model
         'harga',
         'gambar',
         'status',
+        'stok'
     ];
 
     public function getGambarAttribute($value)
